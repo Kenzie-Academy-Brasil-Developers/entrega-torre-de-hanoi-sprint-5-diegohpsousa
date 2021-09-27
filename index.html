@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <main>
+        <h1>Boa Sorte!</h1>
+
+        <div id="msg_conclusao"></div>
+        
+        <section id="torres">
+            <div id="torre1">
+
+                <div id="pino1"></div>
+
+                <!-- <div id="disk1"></div>
+                <div id="disk2"></div>    
+                <div id="disk3"></div> -->
+            </div>
+            <div id="torre2">
+
+                <div id="pino2">
+
+                </div>
+            </div>
+            <div id="torre3">
+
+                <div id="pino3">
+
+                </div>
+            </div>
+        </section>
+
+        <section id="painel">
+            <label for="n_discos">N° de Discos</label>
+            <select name="n_discos" id="n_discos">
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+            </select>
+            <label for="min_movimentos">Mínimo de Movimentos</label>
+            <input name="min_movimentos" type="text disabled">
+            <label for="n_movimentos">Seu nº de movimentos</label>
+            <input name="n_movimentos" type="text disabled">
+
+            <button>Reiniciar</button>
+            <button>Desfazer</button>
+
+        </section>
+
+    </main>
+
+
+    <script src="./script.js"></script>
+</body>
+</html>
