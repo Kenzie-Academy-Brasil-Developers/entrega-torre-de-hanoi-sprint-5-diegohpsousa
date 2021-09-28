@@ -90,7 +90,7 @@ box_torres.addEventListener('click', function(evt){
         selectTowerDestination = element;
         let arrAuxTorreOrigin = arrayAreaTorre[parseInt(selectTowerOrigin.id[9]) - 1];
         let arrAuxTorreDestination = arrayAreaTorre[parseInt(selectTowerDestination.id[9]) - 1];
-
+        // console.log(arrAuxTorreOrigin)
 
         // QUANDO A TORRE DE DESTINO NAO TEM BLOCO NENHUM
         if(selectTowerDestination.childElementCount === 0){
