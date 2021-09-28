@@ -48,19 +48,25 @@
         </section>
 
         <section id="painel">
-            <label for="n_discos">N° de Discos</label>
-            <select name="n_discos" id="n_discos">
-                <option value="03">03</option>
-                <option value="04">04</option>
-                <option value="05">05</option>
-                <option value="06">06</option>
-                <option value="07">07</option>
-                <option value="08">08</option>
-            </select>
-            <label for="min_movimentos">Nº Min. de Movimentos</label>
-            <input id="min_movimentos" name="min_movimentos" type="text" disabled>
-            <label for="n_movimentos">Nº Movimentos</label>
-            <input id="n_movimentos" name="n_movimentos" type="text" disabled>
+            <div class="divInput">
+                <label class="inputs" for="n_discos">N° de Discos</label>
+                 <select class="inputs input_box" name="n_discos" id="n_discos">
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                </select>
+            </div>
+            <div class="divInput">
+                <label class="inputs" for="min_movimentos">Nº Min. de Movimentos</label>
+                <input class="inputs input_box" id="min_movimentos" name="min_movimentos" type="text" disabled>
+            </div>
+            <div class="divInput">
+                 <label class="inputs" for="n_movimentos">Nº Movimentos</label>
+                 <input class="inputs input_box" id="n_movimentos" name="n_movimentos" type="text" disabled>
+            </div>
 
             <button id="reiniciar">Reiniciar</button>
 
