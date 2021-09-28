@@ -81,8 +81,7 @@ function newGame(){
 
 box_torres.addEventListener('click', function(evt){
     
-    let element = evt.target.closest('div');
-    console.log(element);
+    let element = evt.target.closest('.areaTorre');
 
     if(selectTowerOrigin === undefined){
         selectTowerOrigin = element;
@@ -90,34 +89,40 @@ box_torres.addEventListener('click', function(evt){
         selectTowerDestination = element;
         let arrAuxTorreOrigin = arrayAreaTorre[parseInt(selectTowerOrigin.id[9]) - 1];
         let arrAuxTorreDestination = arrayAreaTorre[parseInt(selectTowerDestination.id[9]) - 1];
-        // console.log(arrAuxTorreOrigin)
-
+        
+        // SE POR ACASO EU QUISER TIRAR UM BLOCO DE ONDE NAO TEM MAIS
+        if(arrAuxTorreOrigin.length === 0){
+            selectTowerOrigin = undefined;
+            selectTowerDestination = undefined;
+        }
         // QUANDO A TORRE DE DESTINO NAO TEM BLOCO NENHUM
-        if(selectTowerDestination.childElementCount === 0){
-            let element = arrAuxTorreOrigin.shift();
+        else if(arrAuxTorreDestination.length === 0){
+            // console.log('aqui->',arrAuxTorreOrigin)
+            let element = arrAuxTorreOrigin.pop();
             arrAuxTorreDestination.push(element);
 
-            console.log(arrayAreaTorre)
             selectTowerDestination.appendChild(element);
 
             selectTowerOrigin = undefined;
             selectTowerDestination = undefined;
         }
         // QUANDO A TORRE DE DESTINO JA POSSUI BLOCOS 
-        else if(arrAuxTorreOrigin[0].clientWidth < arrAuxTorreDestination[0].clientWidth){
-            let element = arrAuxTorreOrigin.shift();
+        else if(arrAuxTorreOrigin[arrAuxTorreOrigin.length - 1].clientWidth < arrAuxTorreDestination[arrAuxTorreDestination.length - 1].clientWidth){
+            let element = arrAuxTorreOrigin.pop();
             arrAuxTorreDestination.push(element);
 
-            console.log(arrayAreaTorre)
             selectTowerDestination.appendChild(element);
 
             selectTowerOrigin = undefined;
             selectTowerDestination = undefined;
-        }else{
+        }
+        // QUANDO NAO POSSO REALIZAR O MOVIMENTO
+        else{
             selectTowerOrigin = undefined;
             selectTowerDestination = undefined;
         }
     }
+    console.log(arrayAreaTorre)
 });
 
 reiniciar.addEventListener('click', function(){
