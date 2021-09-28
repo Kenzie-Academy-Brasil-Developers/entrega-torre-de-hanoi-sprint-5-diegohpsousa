@@ -29,6 +29,13 @@ function app(){
 // NA POSICAO ORIGINAL
 function addDiskParent(n_discos){
     const disks = document.querySelectorAll('.disk')
+    
+    for(i=0; i<8; i++ ){
+        if(disks[i].classList.contains('hide') == false){
+            disks[i].classList.add('hide');
+        }
+    }
+           
 
     switch(n_discos){
         case 8:
