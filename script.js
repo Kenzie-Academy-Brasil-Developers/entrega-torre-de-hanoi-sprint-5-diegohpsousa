@@ -82,11 +82,14 @@ function newGame(){
 box_torres.addEventListener('click', function(evt){
     
     let element = evt.target.closest('.areaTorre');
-
+    // selectTowerOrigin.classList.toggle('selecao');
     if(selectTowerOrigin === undefined){
         selectTowerOrigin = element;
+        selectTowerOrigin.classList.toggle('selecao');
     }else if(selectTowerOrigin !== undefined && selectTowerDestination === undefined){
         selectTowerDestination = element;
+        selectTowerOrigin.classList.toggle('selecao');
+
         let arrAuxTorreOrigin = arrayAreaTorre[parseInt(selectTowerOrigin.id[9]) - 1];
         let arrAuxTorreDestination = arrayAreaTorre[parseInt(selectTowerDestination.id[9]) - 1];
         

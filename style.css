@@ -47,7 +47,7 @@ table {
 
 /* TITULO - BOX_TORRES - DIEGO */
 .app{
-    background-color: aqua;
+    /* background-color: aqua; */
 
     width: 100vw;
     height: 100vh;
@@ -155,6 +155,10 @@ table {
     width: inherit;
     display: flex;
     justify-content: space-between;
+}
+
+.selecao{
+    box-shadow: inset 0 0 1rem green;
 }
 
 @media screen and (min-width: 500px) {
