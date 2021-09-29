@@ -16,8 +16,8 @@ const reiniciar = document.querySelector('#reiniciar');
 let min_movimentos = document.getElementById('min_movimentos')
 min_movimentos.value = `${(2 ** n_blocos.value) - 1}`;
 
-// ESSAS VARIAVEIS GUARDARA APENAS OS DISCOS QUE ESTAO PRESENTES EM CADA TORRE
-let arrayAreaTorre = [];
+let num_movimentos = document.getElementById('n_movimentos');
+num_movimentos.value = '0'
 
 // VARIAVEIS QUE APONTAM PARA A TORRE DE ORIGEM E A TORRE DE DESTINO
 // QUE OS BLOCOS IRAO TRANSITAR
@@ -41,7 +41,7 @@ function addBlockParent(element,parentElement) {
 function newGame(n_blocos) {
 
     // CRIAR A QUANTIDADE DE BLOCOS
-    for (i = 1; i <= n_blocos; i++) {
+    for (let i = 1; i <= parseInt(n_blocos); i++){
         const div = document.createElement('div');
         div.classList.add(`disk`);
         div.classList.add(`disk${i}`);
@@ -61,10 +61,7 @@ box_torres.addEventListener('click', function (evt) {
         selectTowerDestination = element;
         selectTowerOrigin.classList.toggle('selecao');
 
-        // DUAS VARIAVEIS QUE CONTERAM UM ARRAY DE ARRAY COM TRES ELEMENTOS,
-        // CADA ELEMENTO REPRESENTANDO UMA TORRE
-        // let arrAuxTorreOrigin = arrayAreaTorre[parseInt(selectTowerOrigin.id[9]) - 1];
-        // let arrAuxTorreDestination = arrayAreaTorre[parseInt(selectTowerDestination.id[9]) - 1];
+        console.log(selectTowerOrigin,selectTowerDestination)
 
         // SE POR ACASO EU QUISER TIRAR UM BLOCO DE ONDE NAO TEM MAIS
         if (selectTowerOrigin.childElementCount === 0) {
@@ -78,13 +75,20 @@ box_torres.addEventListener('click', function (evt) {
 
             selectTowerOrigin = undefined;
             selectTowerDestination = undefined;
+
+            // CONTA MAIS UM MOVIMENTO QUE USER EFETUOU
+            let value = (Number.parseInt(num_movimentos.value)) + 1;
+            num_movimentos.value = `${value}`;
         }
         // QUANDO A TORRE DE DESTINO JA POSSUI BLOCOS 
-        else if (selectTowerOrigin.firstElementChild.clientWidth < selectTowerDestination.lastElementChild.clientWidth) {
+        else if (selectTowerOrigin.lastElementChild.clientWidth < selectTowerDestination.lastElementChild.clientWidth) {
             selectTowerDestination.appendChild(selectTowerOrigin.lastElementChild)
 
             selectTowerOrigin = undefined;
             selectTowerDestination = undefined;
+            
+            let value = (Number.parseInt(num_movimentos.value)) + 1;
+            num_movimentos.value = `${value}`;
         }
         // QUANDO NAO POSSO REALIZAR O MOVIMENTO
         else {
