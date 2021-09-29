@@ -85,7 +85,7 @@ box_torres.addEventListener('click', function (evt) {
             selectTowerDestination.appendChild(selectTowerOrigin.lastElementChild)
 
             // AQUI VAI O CASO DE VITORIA
-            if(selectTowerDestination.id === 'areaTorre3' && selectTowerDestination.childElementCount === 3){
+            if(selectTowerDestination.id === 'areaTorre3' && selectTowerDestination.childElementCount === parseInt(n_blocos.value)){
                 console.log('ganhouu')
             }
 
