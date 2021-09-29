@@ -92,6 +92,7 @@ table {
     align-items: center;
     justify-content: flex-start;
 }
+
 .pinos{
     /* border: 3px solid black; */
     /* position: relative; */
@@ -110,14 +111,14 @@ table {
     border: 1px solid black;
     border-radius: 5px;
 }
-.disk1{width: 15px; background-color: lawngreen;}
-.disk2{width: 25px; background-color: rgb(231, 0, 252);}
-.disk3{width: 35px; background-color: rgb(0, 244, 252);}
-.disk4{width: 45px; background-color: rgb(252, 29, 0);}
-.disk5{width: 55px; background-color: rgb(252, 0, 139);}
-.disk6{width: 65px; background-color: rgb(118, 0, 252);}
-.disk7{width: 75px; background-color: rgb(248, 252, 0);}
-.disk8{width: 85px; background-color: rgb(3, 54, 60);}
+.disk8{width: 15px; background-color: lawngreen;}
+.disk7{width: 25px; background-color: rgb(231, 0, 252);}
+.disk6{width: 35px; background-color: rgb(0, 244, 252);}
+.disk5{width: 45px; background-color: rgb(252, 29, 0);}
+.disk4{width: 55px; background-color: rgb(252, 0, 139);}
+.disk3{width: 65px; background-color: rgb(118, 0, 252);}
+.disk2{width: 75px; background-color: rgb(248, 252, 0);}
+.disk1{width: 85px; background-color: rgb(3, 54, 60);}
 .hide{display: none;}
 /* PAINEL - VITOR */
 
