@@ -84,6 +84,11 @@ box_torres.addEventListener('click', function (evt) {
         else if (selectTowerOrigin.lastElementChild.clientWidth < selectTowerDestination.lastElementChild.clientWidth) {
             selectTowerDestination.appendChild(selectTowerOrigin.lastElementChild)
 
+            // AQUI VAI O CASO DE VITORIA
+            if(selectTowerDestination.id === 'areaTorre3' && selectTowerDestination.childElementCount === 3){
+                console.log('ganhouu')
+            }
+
             selectTowerOrigin = undefined;
             selectTowerDestination = undefined;
             
@@ -96,6 +101,7 @@ box_torres.addEventListener('click', function (evt) {
             selectTowerDestination = undefined;
         }
     }
+
 });
 
 reiniciar.addEventListener('click', function () {
