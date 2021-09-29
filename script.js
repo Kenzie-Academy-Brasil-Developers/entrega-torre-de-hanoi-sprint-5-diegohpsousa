@@ -28,8 +28,9 @@ function app() {
 // NA POSICAO ORIGINAL OU INICIAL 
 function addDiskParent(n_discos) {
     const disks = document.querySelectorAll('.disk')
-    console.log('disks', disks)
-    // EH PRECISO ZERA-LAS A CADA NOVO JOGO
+
+    // EH PRECISO ZERAR O ARRAY DE ARRAYS QUE REPRESENTA AS TORRES 
+    // A CADA NOVO JOGO
     arrayAreaTorre = [];
 
     // INICIA TODOS OS BLOCOS COM A CLASSE hide PARA FICARAEM OCULTOS
@@ -65,6 +66,9 @@ function addDiskParent(n_discos) {
             arrAux.push(disks[2]);
             break;
     }
+
+    // ORDENACAO NECESSARIA PARA DISPOR OS ELEMENTOS NO arrAux DE 
+    // ACORDO COMO SE APRENSENTA NO DOOM
     arrAux.sort((a, b) => {
         if (a.clientWidth > b.clientWidth) {
             return 1;
@@ -76,6 +80,8 @@ function addDiskParent(n_discos) {
 
         return 0;
     })
+
+    // arrayAreaTorre[[DISCOS NA TORRE INICIAL],[],[]]
     arrayAreaTorre.push(arrAux);
     arrayAreaTorre.push([]);
     arrayAreaTorre.push([]);
@@ -89,11 +95,10 @@ function newGame() {
     addDiskParent(parseInt(n_discos.value))
 }
 
-
 box_torres.addEventListener('click', function (evt) {
 
     let element = evt.target.closest('.areaTorre');
-    // selectTowerOrigin.classList.toggle('selecao');
+
     if (selectTowerOrigin === undefined) {
         selectTowerOrigin = element;
         selectTowerOrigin.classList.toggle('selecao');
@@ -101,9 +106,11 @@ box_torres.addEventListener('click', function (evt) {
         selectTowerDestination = element;
         selectTowerOrigin.classList.toggle('selecao');
 
+        // DUAS VARIAVEIS QUE CONTERAM UM ARRAY DE ARRAY COM TRES ELEMENTOS,
+        // CADA ELEMENTO REPRESENTANDO UMA TORRE
         let arrAuxTorreOrigin = arrayAreaTorre[parseInt(selectTowerOrigin.id[9]) - 1];
         let arrAuxTorreDestination = arrayAreaTorre[parseInt(selectTowerDestination.id[9]) - 1];
-        console.log('arrAuxTorreOrigin = ', arrAuxTorreOrigin)
+
         // SE POR ACASO EU QUISER TIRAR UM BLOCO DE ONDE NAO TEM MAIS
         if (arrAuxTorreOrigin.length === 0) {
             selectTowerOrigin = undefined;
@@ -111,7 +118,6 @@ box_torres.addEventListener('click', function (evt) {
         }
         // QUANDO A TORRE DE DESTINO NAO TEM BLOCO NENHUM
         else if (arrAuxTorreDestination.length === 0) {
-            // console.log('aqui->',arrAuxTorreOrigin)
             let element = arrAuxTorreOrigin.shift();
             arrAuxTorreDestination.unshift(element);
 
@@ -136,6 +142,9 @@ box_torres.addEventListener('click', function (evt) {
             selectTowerDestination = undefined;
         }
     }
+
+    // DEPOIS DAS ALTERACOES NO ARRAY DE ARRAYS MOSTRA COMO SE APRESENTA
+    // ATUALMENTE ESSE ARRAY
     console.log(arrayAreaTorre)
 });
 
@@ -144,6 +153,7 @@ reiniciar.addEventListener('click', function () {
     selectTowerOrigin = document.getElementById('areaTorre1');
     
     newGame();
+
     // FOR PARA PASSAR TODOS OS BLOCOS PARA A TORRE INICIAL DO JOGO
     for(let i = 0;i < arrayAreaTorre.length;i++){
         let arr = arrayAreaTorre[i];
@@ -151,6 +161,7 @@ reiniciar.addEventListener('click', function () {
             selectTowerOrigin.appendChild(arr[z]);
         }
     }
+
     selectTowerOrigin = undefined;
     selectTowerDestination = undefined;
 
