@@ -1,14 +1,20 @@
-const n_discos = document.querySelector('#n_discos');
+const n_blocos = document.querySelector('#n_blocos');
 
 // VARIAVEL PAI QUE SERA INSERIDO O OBSERVER (BUBBLING)
 const box_torres = document.getElementById('box_torres');
 
+// VARIAVEIS QUE REPRESENTAM CADA TORRE 
+const areaTorre1 = document.getElementById('areaTorre1');
+const areaTorre2 = document.getElementById('areaTorre2');
+const areaTorre3 = document.getElementById('areaTorre3');
+
+// VARIAVEL QUE REPRESENTARA O BOTAO DO HTML PARA REINICIAR O GAME
 const reiniciar = document.querySelector('#reiniciar');
 
 // VARIAVEL QUE ARMAZENARA A QUANTIDADE MINIMA DE MOVIMENTOS PARA VENCER
 // O DESAFIO
 let min_movimentos = document.getElementById('min_movimentos')
-min_movimentos.value = `${(2 ** n_discos.value) - 1}`;
+min_movimentos.value = `${(2 ** n_blocos.value) - 1}`;
 
 // ESSAS VARIAVEIS GUARDARA APENAS OS DISCOS QUE ESTAO PRESENTES EM CADA TORRE
 let arrayAreaTorre = [];
@@ -21,78 +27,26 @@ let selectTowerDestination;
 
 // FUNCAO QUE IRA EXECUTAR NOSSA APLICACAO
 function app() {
-    newGame()
+    newGame(n_blocos.value);
 }
 
-// FUNCAO QUE ADICIONA UMA QUANTIDADE INFORMANDA DE DISCOS
-// NA POSICAO ORIGINAL OU INICIAL 
-function addDiskParent(n_discos) {
-    const disks = document.querySelectorAll('.disk')
-
-    // EH PRECISO ZERAR O ARRAY DE ARRAYS QUE REPRESENTA AS TORRES 
-    // A CADA NOVO JOGO
-    arrayAreaTorre = [];
-
-    // INICIA TODOS OS BLOCOS COM A CLASSE hide PARA FICARAEM OCULTOS
-    for (i = 0; i < 8; i++) {
-        if (disks[i].classList.contains('hide') == false) {
-            disks[i].classList.add('hide');
-        }
-    }
-
-    let arrAux = [];
-    switch (n_discos) {
-        case 8:
-            disks[7].classList.remove('hide');
-            arrAux.push(disks[7]);
-        case 7:
-            disks[1].classList.remove('hide');
-            arrAux.push(disks[1]);
-        case 6:
-            disks[3].classList.remove('hide');
-            arrAux.push(disks[3]);
-        case 5:
-            disks[5].classList.remove('hide');
-            arrAux.push(disks[5]);
-        case 4:
-            disks[0].classList.remove('hide');
-            arrAux.push(disks[0]);
-        case 3:
-            disks[6].classList.remove('hide');
-            disks[4].classList.remove('hide');
-            disks[2].classList.remove('hide');
-            arrAux.push(disks[6]);
-            arrAux.push(disks[4]);
-            arrAux.push(disks[2]);
-            break;
-    }
-
-    // ORDENACAO NECESSARIA PARA DISPOR OS ELEMENTOS NO arrAux DE 
-    // ACORDO COMO SE APRENSENTA NO DOOM
-    arrAux.sort((a, b) => {
-        if (a.clientWidth > b.clientWidth) {
-            return 1;
-        }
-
-        if (a.clientWidth < b.clientWidth) {
-            return -1;
-        }
-
-        return 0;
-    })
-
-    // arrayAreaTorre[[DISCOS NA TORRE INICIAL],[],[]]
-    arrayAreaTorre.push(arrAux);
-    arrayAreaTorre.push([]);
-    arrayAreaTorre.push([]);
-    console.log(arrayAreaTorre);
+// FUNCAO QUE ADICIONA UM BLOCO A UM INFORMANDO PAI
+function addBlockParent(element,parentElement) {
+        parentElement.appendChild(element);
 }
 
 
 // FUNCAO QUE DISPONIBILIZA OS DISCOS NA POSICAO INICIAL
 // PARA INICIO DO JOGO
-function newGame() {
-    addDiskParent(parseInt(n_discos.value))
+function newGame(n_blocos) {
+
+    // CRIAR A QUANTIDADE DE BLOCOS
+    for (i = 1; i <= n_blocos; i++) {
+        const div = document.createElement('div');
+        div.classList.add(`disk`);
+        div.classList.add(`disk${i}`);
+        addBlockParent(div,areaTorre1);
+    }
 }
 
 box_torres.addEventListener('click', function (evt) {
@@ -102,36 +56,32 @@ box_torres.addEventListener('click', function (evt) {
     if (selectTowerOrigin === undefined) {
         selectTowerOrigin = element;
         selectTowerOrigin.classList.toggle('selecao');
-    } else if (selectTowerOrigin !== undefined && selectTowerDestination === undefined) {
+    } 
+    else if (selectTowerOrigin !== undefined && selectTowerDestination === undefined) {
         selectTowerDestination = element;
         selectTowerOrigin.classList.toggle('selecao');
 
         // DUAS VARIAVEIS QUE CONTERAM UM ARRAY DE ARRAY COM TRES ELEMENTOS,
         // CADA ELEMENTO REPRESENTANDO UMA TORRE
-        let arrAuxTorreOrigin = arrayAreaTorre[parseInt(selectTowerOrigin.id[9]) - 1];
-        let arrAuxTorreDestination = arrayAreaTorre[parseInt(selectTowerDestination.id[9]) - 1];
+        // let arrAuxTorreOrigin = arrayAreaTorre[parseInt(selectTowerOrigin.id[9]) - 1];
+        // let arrAuxTorreDestination = arrayAreaTorre[parseInt(selectTowerDestination.id[9]) - 1];
 
         // SE POR ACASO EU QUISER TIRAR UM BLOCO DE ONDE NAO TEM MAIS
-        if (arrAuxTorreOrigin.length === 0) {
+        if (selectTowerOrigin.childElementCount === 0) {
+
             selectTowerOrigin = undefined;
             selectTowerDestination = undefined;
         }
         // QUANDO A TORRE DE DESTINO NAO TEM BLOCO NENHUM
-        else if (arrAuxTorreDestination.length === 0) {
-            let element = arrAuxTorreOrigin.shift();
-            arrAuxTorreDestination.unshift(element);
-
-            selectTowerDestination.appendChild(element);
+        else if (selectTowerDestination.childElementCount === 0) {
+            selectTowerDestination.appendChild(selectTowerOrigin.lastElementChild)
 
             selectTowerOrigin = undefined;
             selectTowerDestination = undefined;
         }
         // QUANDO A TORRE DE DESTINO JA POSSUI BLOCOS 
-        else if (arrAuxTorreOrigin[0].clientWidth < arrAuxTorreDestination[0].clientWidth) {
-            let element = arrAuxTorreOrigin.shift();
-            arrAuxTorreDestination.unshift(element);
-
-            selectTowerDestination.appendChild(element);
+        else if (selectTowerOrigin.firstElementChild.clientWidth < selectTowerDestination.lastElementChild.clientWidth) {
+            selectTowerDestination.appendChild(selectTowerOrigin.lastElementChild)
 
             selectTowerOrigin = undefined;
             selectTowerDestination = undefined;
@@ -142,25 +92,16 @@ box_torres.addEventListener('click', function (evt) {
             selectTowerDestination = undefined;
         }
     }
-
-    // DEPOIS DAS ALTERACOES NO ARRAY DE ARRAYS MOSTRA COMO SE APRESENTA
-    // ATUALMENTE ESSE ARRAY
-    console.log(arrayAreaTorre)
 });
 
 reiniciar.addEventListener('click', function () {
-    min_movimentos.value = `${(2 ** n_discos.value) - 1}`;
-    selectTowerOrigin = document.getElementById('areaTorre1');
-    
-    newGame();
+    min_movimentos.value = `${(2 ** n_blocos.value) - 1}`;
 
-    // FOR PARA PASSAR TODOS OS BLOCOS PARA A TORRE INICIAL DO JOGO
-    for(let i = 0;i < arrayAreaTorre.length;i++){
-        let arr = arrayAreaTorre[i];
-        for(let z = arr.length - 1;z >= 0;z--){
-            selectTowerOrigin.appendChild(arr[z]);
-        }
-    }
+
+    areaTorre1.innerHTML = '';
+    areaTorre2.innerHTML = '';
+    areaTorre3.innerHTML = '';
+    newGame(n_blocos.value);
 
     selectTowerOrigin = undefined;
     selectTowerDestination = undefined;
