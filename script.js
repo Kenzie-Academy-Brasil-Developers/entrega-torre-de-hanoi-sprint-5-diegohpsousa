@@ -8,6 +8,11 @@ const areaTorre1 = document.getElementById('areaTorre1');
 const areaTorre2 = document.getElementById('areaTorre2');
 const areaTorre3 = document.getElementById('areaTorre3');
 
+// VARIAVEL REPRESENTA OS BOX'S DAS TORRES
+const boxTorre1 = document.getElementById('torre1')
+const boxTorre2 = document.getElementById('torre2')
+const boxTorre3 = document.getElementById('torre3')
+
 // VARIAVEL QUE REPRESENTARA O BOTAO DO HTML PARA REINICIAR O GAME
 const reiniciar = document.querySelector('#reiniciar');
 
@@ -45,6 +50,23 @@ function addBlockParent(element, parentElement) {
 // PARA INICIO DO JOGO
 function newGame(n_blocos) {
 
+    // CRIARA AS TORRES
+    const div1 = document.createElement('div');
+    div1.id = `pino1`;
+    div1.classList.add('pinos');
+    boxTorre1.appendChild(div1);
+
+    const div2 = document.createElement('div');
+    div2.id = `pino2`;
+    div2.classList.add('pinos');
+    boxTorre2.appendChild(div2);
+
+    const div3 = document.createElement('div');
+    div3.id = `pino3`;
+    div3.classList.add('pinos');
+    boxTorre3.appendChild(div3);
+
+
     // CRIAR A QUANTIDADE DE BLOCOS
     for (let i = 1; i <= parseInt(n_blocos); i++) {
         const div = document.createElement('div');
@@ -57,14 +79,14 @@ function newGame(n_blocos) {
 box_torres.addEventListener('click', function (evt) {
 
     let element = evt.target.closest('.areaTorre');
-    
+
     if (selectTowerOrigin === undefined) {
 
         selectTowerOrigin = element;
-        if(selectTowerOrigin.childElementCount !== 0){
+        if (selectTowerOrigin.childElementCount !== 0) {
             selectTowerOrigin.classList.toggle('selecao');
             selectTowerOrigin.lastElementChild.classList.toggle('flutuar');
-        }else{
+        } else {
             selectTowerOrigin = undefined;
             selectTowerDestination = undefined;
         }
@@ -110,6 +132,7 @@ box_torres.addEventListener('click', function (evt) {
                 } else {
                     areaMsg.innerText = "Brabo!"
                 }
+                
                 console.log('ganhouu' + num_movimentos.value + '/' + min_movimentos.value);
             }
 
@@ -134,8 +157,15 @@ reiniciar.addEventListener('click', function () {
     areaTorre1.innerHTML = '';
     areaTorre2.innerHTML = '';
     areaTorre3.innerHTML = '';
+
+    boxTorre1.removeChild(boxTorre1.lastChild);
+    boxTorre2.removeChild(boxTorre2.lastChild);
+    boxTorre3.removeChild(boxTorre3.lastChild);
+
     newGame(n_blocos.value);
 
+    selectTowerOrigin.classList.toggle('selecao');
+    selectTowerDestination.classList.toggle('selecao');
     selectTowerOrigin = undefined;
     selectTowerDestination = undefined;
 
@@ -148,8 +178,15 @@ btnNovoJogo.addEventListener('click', function () {
     areaTorre1.innerHTML = '';
     areaTorre2.innerHTML = '';
     areaTorre3.innerHTML = '';
+    
+    boxTorre1.removeChild(boxTorre1.lastChild);
+    boxTorre2.removeChild(boxTorre2.lastChild);
+    boxTorre3.removeChild(boxTorre3.lastChild);
+
     newGame(n_blocos.value);
 
+    selectTowerOrigin.classList.toggle('selecao');
+    selectTowerDestination.classList.toggle('selecao');
     selectTowerOrigin = undefined;
     selectTowerDestination = undefined;
 
