@@ -46,6 +46,9 @@ table {
 /* Estilização */
 
 /* TITULO - BOX_TORRES - DIEGO */
+body{
+    background-image: url(./assets/img/fundo.jpg);
+}
 .app{
     /* background-color: aqua; */
 
@@ -60,7 +63,7 @@ table {
  color: blue;
 }
 #box_torres{
-    /* background-color: blueviolet; */
+    background-color: rgba(255, 255, 255, 0.9);
     display: flex;
     justify-content: space-around;
     width: 320px;
@@ -123,7 +126,7 @@ table {
 /* PAINEL - VITOR */
 
 #painel{
-    /* background-color: teal; */
+    background-color: rgba(255, 255, 255, 0.9);
     width: 200px;
     display: flex;
     flex-wrap: wrap;
