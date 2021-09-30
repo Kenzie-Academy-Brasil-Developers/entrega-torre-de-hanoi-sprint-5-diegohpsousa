@@ -53,12 +53,11 @@ body{
     font-family: 'Gluten', Verdana, Geneva, Tahoma, sans-serif;
 }
 .app{
-    /* background-color: #343a40 ; */
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* justify-content: space-between; */
     width: 100vw;
-    
 }
 .titulo{
     width: 100vw;
@@ -160,7 +159,7 @@ body{
     list-style: none;
     font-family: 'Gluten',  'Luckiest Guy', cursive;
     height: 20px;
-    border: 2px;
+    border: 2px solid black;
     border-radius: 5px;
     background-color: white;
     margin: 2px 0;
@@ -281,7 +280,7 @@ body{
     background-color: #0579FC;
     box-sizing: border-box;
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
     color: white;
     font-weight: 600;
 }
@@ -494,9 +493,17 @@ body{
         height: 35px;
         border-radius: 8px;
     }
-
+    .label{
+        font-size: 20px;
+    }
+    .inputs{
+        font-size: 20px;
+    }
     #painel input{
         width: 50px;
+    }
+    .footer{
+        font-size: 20px;
     }
 
 }
