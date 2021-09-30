@@ -36,8 +36,8 @@ function app() {
 }
 
 // FUNCAO QUE ADICIONA UM BLOCO A UM INFORMANDO PAI
-function addBlockParent(element,parentElement) {
-        parentElement.appendChild(element);
+function addBlockParent(element, parentElement) {
+    parentElement.appendChild(element);
 }
 
 
@@ -46,33 +46,35 @@ function addBlockParent(element,parentElement) {
 function newGame(n_blocos) {
 
     // CRIAR A QUANTIDADE DE BLOCOS
-    for (let i = 1; i <= parseInt(n_blocos); i++){
+    for (let i = 1; i <= parseInt(n_blocos); i++) {
         const div = document.createElement('div');
         div.classList.add(`disk`);
         div.classList.add(`disk${i}`);
-        addBlockParent(div,areaTorre1);
+        addBlockParent(div, areaTorre1);
     }
 }
 
 box_torres.addEventListener('click', function (evt) {
 
     let element = evt.target.closest('.areaTorre');
-    if(element === null){
-        ;
-    }
-    else if (selectTowerOrigin === undefined) {
-        
-        selectTowerOrigin = element;
-        selectTowerOrigin.classList.toggle('selecao');
-        selectTowerOrigin.lastElementChild.classList.toggle('flutuar');
+    
+    if (selectTowerOrigin === undefined) {
 
-    } 
+        selectTowerOrigin = element;
+        if(selectTowerOrigin.childElementCount !== 0){
+            selectTowerOrigin.classList.toggle('selecao');
+            selectTowerOrigin.lastElementChild.classList.toggle('flutuar');
+        }else{
+            selectTowerOrigin = undefined;
+            selectTowerDestination = undefined;
+        }
+    }
     else if (selectTowerOrigin !== undefined && selectTowerDestination === undefined) {
         selectTowerDestination = element;
         selectTowerOrigin.classList.toggle('selecao');
         selectTowerOrigin.lastElementChild.classList.toggle('flutuar');
 
-        console.log(selectTowerOrigin,selectTowerDestination)
+        console.log(selectTowerOrigin, selectTowerDestination)
 
         // SE POR ACASO EU QUISER TIRAR UM BLOCO DE ONDE NAO TEM MAIS
         if (selectTowerOrigin.childElementCount === 0) {
@@ -100,21 +102,21 @@ box_torres.addEventListener('click', function (evt) {
             num_movimentos.value = `${value}`;
 
             // AQUI VAI O CASO DE VITORIA
-            if(selectTowerDestination.id === 'areaTorre3' && selectTowerDestination.childElementCount === parseInt(n_blocos.value)){
+            if (selectTowerDestination.id === 'areaTorre3' && selectTowerDestination.childElementCount === parseInt(n_blocos.value)) {
                 containMsg.style.display = "block";
                 const areaMsg = document.querySelector('.areaMsg');
-                if(num_movimentos.value > min_movimentos.value){
+                if (num_movimentos.value > min_movimentos.value) {
                     areaMsg.innerText = "Muito bom! Agora tente fazer com o minimo de movimentos!";
-                }else{
+                } else {
                     areaMsg.innerText = "Brabo!"
                 }
-                console.log('ganhouu'+ num_movimentos.value +'/'+ min_movimentos.value);
+                console.log('ganhouu' + num_movimentos.value + '/' + min_movimentos.value);
             }
 
             selectTowerOrigin = undefined;
             selectTowerDestination = undefined;
-            
-            
+
+
         }
         // QUANDO NAO POSSO REALIZAR O MOVIMENTO
         else {
