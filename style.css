@@ -48,6 +48,7 @@ table {
 /* TITULO - BOX_TORRES - DIEGO */
 body{
     background-image: url(./assets/img/fundo.jpg);
+    font-family: 'Gluten', Verdana, Geneva, Tahoma, sans-serif;
 }
 .app{
     /* background-color: aqua; */
@@ -61,9 +62,11 @@ body{
 }
 .titulo{
  color: blue;
+ background-color: rgba(255, 255, 255, 0.9);
+
 }
 #box_torres{
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.5);
     display: flex;
     justify-content: space-around;
     width: 320px;
@@ -73,7 +76,7 @@ body{
 }
 .torres{
     /* background-color: brown; */
-    width: 100px;
+    width: 33.333%;
     height: 120px;
     border-bottom: 6px solid black;
     border-bottom-left-radius: 10px;
@@ -237,7 +240,7 @@ body{
 
 @media screen and (min-width: 500px) {
     .app{
-        background-color: wheat;
+        /* background-color: wheat; */
     }
     .titulo{
         font-size: 28px;
@@ -304,6 +307,7 @@ body{
         font-size: 18px;
         border-radius: 5px;
         font-weight: 600;
+        border: 2px solid black;
     }
     
     #msg_conclusao{
@@ -316,7 +320,7 @@ body{
 }
 @media screen and (min-width: 720px) {
     .app{
-        background-color:cadetblue;
+        /* background-color:cadetblue; */
     }
     .titulo{
         font-size: 32px;
@@ -387,7 +391,7 @@ body{
 }
 @media screen and (min-width: 1024px) {
     .app{
-        background-color:cornflowerblue;
+        /* background-color:cornflowerblue; */
     }
     .titulo{
         font-size: 50px;
