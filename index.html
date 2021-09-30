@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <link rel="icon" type="image/png" href="assets/img/favicon.png"/>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <title>Torre de Hanoi</title>
 </head>
 
@@ -20,14 +21,14 @@
                 <button id="novoJogo" class="reiniciar">Novo Jogo</button>
             </div>
         </div>
-        
+
 
         <section id="box_torres">
             <div id="torre1" class="torres">
 
                 <div id="areaTorre1" class="areaTorre"></div>
-               
-               
+
+
             </div>
             <div id="torre2" class="torres">
 
@@ -43,8 +44,8 @@
 
         <section id="painel">
             <div class="divInput">
-                <label class="inputs" for="n_discos">N° de Discos</label>
-                 <select class="inputs input_box" name="n_discos" id="n_blocos">
+                <label class="label" for="n_discos">N° de Discos</label>
+                <select class="inputs input_box" name="n_discos" id="n_blocos">
                     <option value="03">03</option>
                     <option value="04">04</option>
                     <option value="05">05</option>
@@ -54,12 +55,12 @@
                 </select>
             </div>
             <div class="divInput">
-                <label class="inputs" for="min_movimentos">Nº Min. de Movimentos</label>
+                <label class="label" for="min_movimentos">Nº Min. de Movimentos</label>
                 <input class="inputs input_box" id="min_movimentos" name="min_movimentos" type="text" disabled>
             </div>
             <div class="divInput">
-                 <label class="inputs" for="n_movimentos">Nº Movimentos</label>
-                 <input class="inputs input_box" id="n_movimentos" name="n_movimentos" type="text" disabled>
+                <label class="label" for="n_movimentos">Nº Movimentos</label>
+                <input class="inputs input_box" id="n_movimentos" name="n_movimentos" type="text" disabled>
             </div>
 
             <button id="reiniciar" class="reiniciar">Reiniciar</button>

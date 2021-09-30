@@ -163,8 +163,9 @@ reiniciar.addEventListener('click', function () {
     boxTorre3.removeChild(boxTorre3.lastChild);
 
     newGame(n_blocos.value);
-
-    selectTowerOrigin.classList.toggle('selecao');
+    if(selectTowerOrigin !== undefined){
+        selectTowerOrigin.classList.toggle('selecao');
+    }
     selectTowerOrigin = undefined;
     selectTowerDestination = undefined;
 
