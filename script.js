@@ -24,6 +24,11 @@ num_movimentos.value = '0'
 let selectTowerOrigin;
 let selectTowerDestination;
 
+// CODIGOS DA MENSAGEM DE CONCLUSÃO
+const containMsg = document.querySelector('#container_msg_conclusao'); //sombra do fundo da janela
+const msgConclusao = document.querySelector('#msg_conclusao'); // janela da msg
+const btnNovoJogo = document.querySelector('#novoJogo');// botão de novo jogo dentro da msg
+
 
 // FUNCAO QUE IRA EXECUTAR NOSSA APLICACAO
 function app() {
@@ -52,14 +57,20 @@ function newGame(n_blocos) {
 box_torres.addEventListener('click', function (evt) {
 
     let element = evt.target.closest('.areaTorre');
-
-    if (selectTowerOrigin === undefined) {
+    if(element === null){
+        ;
+    }
+    else if (selectTowerOrigin === undefined) {
+        
         selectTowerOrigin = element;
         selectTowerOrigin.classList.toggle('selecao');
+        selectTowerOrigin.lastElementChild.classList.toggle('flutuar');
+
     } 
     else if (selectTowerOrigin !== undefined && selectTowerDestination === undefined) {
         selectTowerDestination = element;
         selectTowerOrigin.classList.toggle('selecao');
+        selectTowerOrigin.lastElementChild.classList.toggle('flutuar');
 
         console.log(selectTowerOrigin,selectTowerDestination)
 
@@ -79,21 +90,31 @@ box_torres.addEventListener('click', function (evt) {
             // CONTA MAIS UM MOVIMENTO QUE USER EFETUOU
             let value = (Number.parseInt(num_movimentos.value)) + 1;
             num_movimentos.value = `${value}`;
+            console.log('moveu' + value)
         }
         // QUANDO A TORRE DE DESTINO JA POSSUI BLOCOS 
         else if (selectTowerOrigin.lastElementChild.clientWidth < selectTowerDestination.lastElementChild.clientWidth) {
             selectTowerDestination.appendChild(selectTowerOrigin.lastElementChild)
 
+            let value = (Number.parseInt(num_movimentos.value)) + 1;
+            num_movimentos.value = `${value}`;
+
             // AQUI VAI O CASO DE VITORIA
-            if(selectTowerDestination.id === 'areaTorre3' && selectTowerDestination.childElementCount === 3){
-                console.log('ganhouu')
+            if(selectTowerDestination.id === 'areaTorre3' && selectTowerDestination.childElementCount === parseInt(n_blocos.value)){
+                containMsg.style.display = "block";
+                const areaMsg = document.querySelector('.areaMsg');
+                if(num_movimentos.value > min_movimentos.value){
+                    areaMsg.innerText = "Muito bom! Agora tente fazer com o minimo de movimentos!";
+                }else{
+                    areaMsg.innerText = "Brabo!"
+                }
+                console.log('ganhouu'+ num_movimentos.value +'/'+ min_movimentos.value);
             }
 
             selectTowerOrigin = undefined;
             selectTowerDestination = undefined;
             
-            let value = (Number.parseInt(num_movimentos.value)) + 1;
-            num_movimentos.value = `${value}`;
+            
         }
         // QUANDO NAO POSSO REALIZAR O MOVIMENTO
         else {
@@ -106,7 +127,7 @@ box_torres.addEventListener('click', function (evt) {
 
 reiniciar.addEventListener('click', function () {
     min_movimentos.value = `${(2 ** n_blocos.value) - 1}`;
-
+    num_movimentos.value = 0;
 
     areaTorre1.innerHTML = '';
     areaTorre2.innerHTML = '';
@@ -118,6 +139,21 @@ reiniciar.addEventListener('click', function () {
 
 })
 
+btnNovoJogo.addEventListener('click', function () {
+    min_movimentos.value = `${(2 ** n_blocos.value) - 1}`;
+    num_movimentos.value = 0;
+
+    areaTorre1.innerHTML = '';
+    areaTorre2.innerHTML = '';
+    areaTorre3.innerHTML = '';
+    newGame(n_blocos.value);
+
+    selectTowerOrigin = undefined;
+    selectTowerDestination = undefined;
+
+    containMsg.style.display = "none";
+
+})
 
 
 app();
