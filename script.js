@@ -185,7 +185,9 @@ btnNovoJogo.addEventListener('click', function () {
 
     newGame(n_blocos.value);
 
-    selectTowerOrigin.classList.toggle('selecao');
+    if(selectTowerOrigin !== undefined){
+        selectTowerOrigin.classList.toggle('selecao');
+    }
     selectTowerOrigin = undefined;
     selectTowerDestination = undefined;
 
